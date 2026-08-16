@@ -1,105 +1,146 @@
 
-local Players = game:GetService("Players") 
-local player = Players.LocalPlayer 
-task.wait(1) 
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+local player = Players.LocalPlayer
+local PlayerGui = player:WaitForChild("PlayerGui")
 
-local gui = Instance.new("ScreenGui") 
-gui.Name = "SeraphimLoader" 
-gui.ResetOnSpawn = false 
-gui.DisplayOrder = 10 
-gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling 
-gui.Parent = player.PlayerGui 
 
-local main = Instance.new("Frame") 
-main.Name = "Main" 
-main.Size = UDim2.new(0, 350, 0, 370) 
-main.Position = UDim2.new(0.5, -175, 0.3, -185) 
-main.BackgroundColor3 = Color3.fromRGB(28, 28, 30) 
-main.BackgroundTransparency = 0.15 
-main.BorderSizePixel = 0 
-main.Active = true 
-main.Draggable = true 
-main.ZIndex = 10 
-main.Parent = gui 
+if PlayerGui:FindFirstChild("SeraphimLoader") then
+	PlayerGui.SeraphimLoader:Destroy()
+end
 
-Instance.new("UICorner", main).CornerRadius = UDim.new(0, 25) 
+local gui = Instance.new("ScreenGui")
+gui.Name = "SeraphimLoader"
+gui.ResetOnSpawn = false
+gui.DisplayOrder = 10
+gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+gui.Parent = PlayerGui
 
-local stroke = Instance.new("UIStroke") 
-stroke.Color = Color3.fromRGB(200, 200, 200) 
-stroke.Thickness = 1 
-stroke.Transparency = 0.5 
-stroke.Parent = main 
+local main = Instance.new("Frame")
+main.Name = "Main"
+main.Size = UDim2.new(0, 350, 0, 370)
+main.Position = UDim2.new(0.5, -175, 0.5, -185)
+main.BackgroundColor3 = Color3.fromRGB(28, 28, 30)
+main.BackgroundTransparency = 0.15
+main.BorderSizePixel = 0
+main.Active = true
+main.Draggable = true -- BINALIK NA
+main.ZIndex = 10
+main.Parent = gui
+Instance.new("UICorner", main).CornerRadius = UDim.new(0, 25)
 
-local title = Instance.new("TextLabel") 
-title.Text = "SERAPHIM LOADER" 
-title.Font = Enum.Font.GothamBold 
-title.TextSize = 20 
-title.TextColor3 = Color3.new(1, 1, 1) 
-title.BackgroundTransparency = 1 
-title.Size = UDim2.new(1, -50, 0, 40) 
-title.Position = UDim2.new(0, 15, 0, 10) 
-title.ZIndex = 10 
-title.Parent = main 
+local stroke = Instance.new("UIStroke")
+stroke.Color = Color3.fromRGB(200, 200, 200)
+stroke.Thickness = 1
+stroke.Transparency = 0.5
+stroke.Parent = main
 
-local closeBtn = Instance.new("TextButton") 
-closeBtn.Text = "X" 
-closeBtn.Font = Enum.Font.GothamBold 
-closeBtn.TextSize = 16 
-closeBtn.Size = UDim2.new(0, 30, 0, 30) 
-closeBtn.Position = UDim2.new(1, -40, 0, 12) 
-closeBtn.BackgroundColor3 = Color3.fromRGB(255, 59, 48) 
-closeBtn.TextColor3 = Color3.new(1, 1, 1) 
-closeBtn.ZIndex = 10 
-closeBtn.Parent = main 
-Instance.new("UICorner", closeBtn).CornerRadius = UDim.new(1, 0) 
-closeBtn.MouseButton1Click:Connect(function() gui:Destroy() end) 
+local title = Instance.new("TextLabel")
+title.Text = "SERAPHIM LOADER"
+title.Font = Enum.Font.GothamBold
+title.TextSize = 20
+title.TextColor3 = Color3.new(1, 1, 1)
+title.BackgroundTransparency = 1
+title.Size = UDim2.new(1, -50, 0, 40)
+title.Position = UDim2.new(0, 15, 0, 10)
+title.ZIndex = 10
+title.Parent = main
 
-local function createiOSButton(text, yPos, color) 
-	local btn = Instance.new("TextButton") 
-	btn.Text = text 
-	btn.Font = Enum.Font.GothamBold 
-	btn.TextSize = 17 
-	btn.Size = UDim2.new(1, -30, 0, 50) 
-	btn.Position = UDim2.new(0, 15, 0, yPos) 
-	btn.BackgroundColor3 = color 
-	btn.TextColor3 = Color3.new(1, 1, 1) 
-	btn.ZIndex = 10 
-	btn.Parent = main 
-	Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 14) 
-	return btn 
-end 
+local closeBtn = Instance.new("TextButton")
+closeBtn.Text = "X"
+closeBtn.Font = Enum.Font.GothamBold
+closeBtn.TextSize = 16
+closeBtn.Size = UDim2.new(0, 30, 0, 30)
+closeBtn.Position = UDim2.new(1, -40, 0, 12)
+closeBtn.BackgroundColor3 = Color3.fromRGB(255, 59, 48)
+closeBtn.TextColor3 = Color3.new(1, 1, 1)
+closeBtn.ZIndex = 10
+closeBtn.AutoButtonColor = false
+closeBtn.Parent = main
+Instance.new("UICorner", closeBtn).CornerRadius = UDim.new(1, 0)
+closeBtn.MouseButton1Click:Connect(function() gui:Destroy() end)
 
-local killingLabel = Instance.new("TextLabel") 
-killingLabel.Text = "KILLING" 
-killingLabel.Font = Enum.Font.GothamBold 
-killingLabel.TextSize = 15 
-killingLabel.TextColor3 = Color3.fromRGB(200, 200, 200) 
-killingLabel.BackgroundTransparency = 1 
-killingLabel.Size = UDim2.new(1, -30, 0, 20) 
-killingLabel.Position = UDim2.new(0, 20, 0, 65) 
-killingLabel.TextXAlignment = Enum.TextXAlignment.Left 
-killingLabel.ZIndex = 10 
-killingLabel.Parent = main 
+local function createiOSButton(text, yPos, color)
+	local btn = Instance.new("TextButton")
+	btn.Text = text
+	btn.Font = Enum.Font.GothamBold
+	btn.TextSize = 17
+	btn.Size = UDim2.new(1, -30, 0, 50)
+	btn.Position = UDim2.new(0, 15, 0, yPos)
+	btn.BackgroundColor3 = color
+	btn.TextColor3 = Color3.new(1, 1, 1)
+	btn.ZIndex = 10
+	btn.AutoButtonColor = false
+	btn.Parent = main
+	Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 14)
+	return btn
+end
 
-local killBtn = createiOSButton("EXECUTE", 88, Color3.fromRGB(255, 59, 48)) 
-killBtn.MouseButton1Click:Connect(function() print("SCRIPT URL") end) 
 
-local farmingLabel = Instance.new("TextLabel") 
-farmingLabel.Text = "FARMING" 
-farmingLabel.Font = Enum.Font.GothamBold 
-farmingLabel.TextSize = 15 
-farmingLabel.TextColor3 = Color3.fromRGB(200, 200, 200) 
-farmingLabel.BackgroundTransparency = 1 
-farmingLabel.Size = UDim2.new(1, -30, 0, 20) 
-farmingLabel.Position = UDim2.new(0, 20, 0, 150) 
-farmingLabel.TextXAlignment = Enum.TextXAlignment.Left 
-farmingLabel.ZIndex = 10 
-farmingLabel.Parent = main 
+local function safeHttpGet(url)
+	local suc, res = pcall(function()
+		if syn and syn.request then
+			return syn.request({Url = url, Method = "GET"}).Body
+		elseif request then
+			return request({Url = url, Method = "GET"}).Body
+		elseif http_request then
+			return http_request({Url = url, Method = "GET"}).Body
+		else
+			return game:HttpGet(url)
+		end
+	end)
+	if suc then return res else warn("HttpGet failed:", res) return nil end
+end
 
-local farmBtn = createiOSButton("EXECUTE", 173, Color3.fromRGB(52, 199, 89)) 
-farmBtn.MouseButton1Click:Connect(function() print("SCRIPT URL") end) 
+local function safeLoad(code)
+	if not code then return end
+	local suc, err = pcall(loadstring(code))
+	if not suc then warn("Script Error:", err) end
+end
 
-local discordLabel = Instance.new("TextLabel") -- BAGONG DISCORD TITLE
+
+local killingLabel = Instance.new("TextLabel")
+killingLabel.Text = "KILLING"
+killingLabel.Font = Enum.Font.GothamBold
+killingLabel.TextSize = 15
+killingLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+killingLabel.BackgroundTransparency = 1
+killingLabel.Size = UDim2.new(1, -30, 0, 20)
+killingLabel.Position = UDim2.new(0, 20, 0, 65)
+killingLabel.TextXAlignment = Enum.TextXAlignment.Left
+killingLabel.ZIndex = 10
+killingLabel.Parent = main
+
+local killBtn = createiOSButton("EXECUTE", 88, Color3.fromRGB(255, 59, 48))
+killBtn.MouseButton1Click:Connect(function()
+	print("KILLING SCRIPT NOT SET")
+end)
+
+
+local farmingLabel = Instance.new("TextLabel")
+farmingLabel.Text = "FARMING"
+farmingLabel.Font = Enum.Font.GothamBold
+farmingLabel.TextSize = 15
+farmingLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+farmingLabel.BackgroundTransparency = 1
+farmingLabel.Size = UDim2.new(1, -30, 0, 20)
+farmingLabel.Position = UDim2.new(0, 20, 0, 150)
+farmingLabel.TextXAlignment = Enum.TextXAlignment.Left
+farmingLabel.ZIndex = 10
+farmingLabel.Parent = main
+
+local farmBtn = createiOSButton("EXECUTE", 173, Color3.fromRGB(52, 199, 89))
+farmBtn.MouseButton1Click:Connect(function()
+	local scriptUrl = "https://raw.githubusercontent.com/SeraphimXNexus/Seraphim-cloud-/refs/heads/main/powered-seraphimcloud-apps"
+	local code = safeHttpGet(scriptUrl)
+	if code then
+		safeLoad(code)
+		print("Seraphim Cloud Loaded")
+	end
+end)
+
+
+local discordLabel = Instance.new("TextLabel")
 discordLabel.Text = "DISCORD"
 discordLabel.Font = Enum.Font.GothamBold
 discordLabel.TextSize = 15
@@ -111,10 +152,15 @@ discordLabel.TextXAlignment = Enum.TextXAlignment.Left
 discordLabel.ZIndex = 10
 discordLabel.Parent = main
 
-local discordBtn = createiOSButton("JOIN SERAPHIM DISCORD", 258, Color3.fromRGB(0, 122, 255)) -- binaba ko ng konti
-discordBtn.MouseButton1Click:Connect(function() if openurl then openurl("https://discord.gg/uSQEEsMeQ") end end) 
+local discordBtn = createiOSButton("JOIN SERAPHIM DISCORD", 258, Color3.fromRGB(0, 122, 255))
+discordBtn.MouseButton1Click:Connect(function()
+	local link = "https://discord.gg/uSQEEsMeQ"
+	if setclipboard then setclipboard(link) print("Link copied:", link)
+	elseif openurl then openurl(link)
+	else warn("Copy this:", link) end
+end)
 
-local footer = Instance.new("TextLabel") 
+local footer = Instance.new("TextLabel")
 footer.Text = "powered by - seraphim web dev"
 footer.Font = Enum.Font.Gotham
 footer.TextSize = 11
@@ -125,15 +171,15 @@ footer.Position = UDim2.new(0, 0, 1, -20)
 footer.ZIndex = 10
 footer.Parent = main
 
- 
-for _,btn in pairs({killBtn, farmBtn, discordBtn, closeBtn}) do 
-	btn.MouseButton1Down:Connect(function() 
-		btn.BackgroundTransparency = 0.3 
-	end) 
-	btn.MouseButton1Up:Connect(function() 
-		btn.BackgroundTransparency = 0 
-	end) 
-	btn.MouseLeave:Connect(function() 
-		btn.BackgroundTransparency = 0 
-	end) 
+
+for _,btn in pairs({killBtn, farmBtn, discordBtn, closeBtn}) do
+	btn.MouseButton1Down:Connect(function()
+		TweenService:Create(btn, TweenInfo.new(0.1), {BackgroundTransparency = 0.3}):Play()
+	end)
+	btn.MouseButton1Up:Connect(function()
+		TweenService:Create(btn, TweenInfo.new(0.1), {BackgroundTransparency = 0}):Play()
+	end)
+	btn.MouseLeave:Connect(function()
+		TweenService:Create(btn, TweenInfo.new(0.1), {BackgroundTransparency = 0}):Play()
+	end)
 end
